@@ -1,0 +1,36 @@
+#code for timeline scatter plots with matplotlib
+
+#Author: Claudia 
+
+#importing libraries, pandas to read the csv, matplotlib to create the graph
+import pandas as pd
+from matplotlib import pyplot as plt
+plt.style.use('seaborn')
+
+#you have to change the file name everytime, haven't tried adding in a for loop, so this code will produce the graph for 1990, when doing 1991 the line below will end with 1991-Table 1.csv
+
+#reading the csv file with pandas 
+data = pd.read_csv('/Users/claudianashef/Documents/Uni/Second Year /BASC0005/Project Coding /Socioeconomic Factors Data QM/1990-Table 1.csv')
+#assigning factors to the x and y of the graph, and making sure python recognises our third factor - female labour participation rate (%)
+x = data['HDI']
+y = data['Population Growth Rate (%)']
+female_labour_rate = data['female work force'] 
+
+#drawing the scatter plot, assigning the colour of the points to female labour participation rate using the colour gradient "autumn"
+plt.scatter(x, y, c = female_labour_rate, cmap = 'autumn', edgecolor = 'black', 
+            linewidth = 1, alpha = 0.75, s = 100) #size of plots 
+
+#colour bar here is the rhs bar that shows the gradient being used for colour of plots for female labour participation rate 
+cbar = plt.colorbar()
+cbar.set_label('Female Labour Participation Rate \n (% of female population 15 years +)')
+
+#labelling the graph
+plt.title('Population Growth Rate, Female Labour Participation Rate and HDI by Country in 1990')
+plt.xlabel('HDI')
+plt.ylabel('Population Growth Rate (%)')
+
+plt.tight_layout()
+
+plt.show()
+
+
