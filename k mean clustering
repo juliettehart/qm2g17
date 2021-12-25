@@ -1,0 +1,64 @@
+from pandas.core.frame import DataFrame
+# k-means clustering
+#
+# Author: Jakob
+
+# initial imports and definitions
+
+!pip install --upgrade kneed
+#!apt conda install -c conda-forge kneed
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+from kneed import KneeLocator
+from sklearn.datasets import make_blobs
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+from sklearn.preprocessing import StandardScaler
+from matplotlib import pyplot as plt
+
+def transl(idat, idict):
+  ''' Function changing observations according to a dictionary.
+  Dictionary dataframe must contain 2 colums named 'Old' and 'New'
+  '''
+  dict_n = len(idict)
+  #print(dict_n)
+  
+  dict_co = 0
+  
+  while (dict_co < dict_n):
+    idat.rename({idict.loc[dict_co]["Old"]: idict.loc[dict_co]["New"]}, axis = "index", inplace = True)
+    #idat.rename(str.lower, inplace = True)
+    #print(idict.loc[dict_co]["Old"])
+    #print(idict.loc[dict_co]["New"])
+    
+    dict_co = dict_co + 1
+  
+  #print(idat)
+  return(idat)
+
+#def moveUp(istr):
+#  istr = istr[1:]
+#  return(istr)
+
+def delLeadingChar(idat):
+  '''deleting the leading character in the index colum entries
+  '''
+
+  dict_n = len(idat)
+  if (dict_n > 200): dict_n = 200 # cheap error catch 
+
+  dict_row = 0
+  
+  while (dict_row < dict_n):
+    index_name_old = idat.index[dict_row]
+    #print(index_name_old)
+    index_name_new = index_name_old[1:]
+    #print(index_name_new)
+    idat.rename({index_name_old: index_name_new}, axis = 'index', inplace = True)
+    dict_row = dict_row + 1
+    
+  return(idat)
+
+
+
