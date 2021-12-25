@@ -1,0 +1,37 @@
+
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv('https://raw.githubusercontent.com/juliettehart/choropleth/main/choropleth%20map%20HDI')
+
+fig = go.Figure(data=go.Choropleth(
+    locations = df['CODE'],
+    z = df['HDI'],
+    text = df['COUNTRY'],
+    colorscale = 'pinkyl',
+    autocolorscale=False,
+    reversescale=True,
+    marker_line_color='darkgray',
+    marker_line_width=0.5,
+    colorbar_title = 'HDI per country (0-1)',
+))
+
+fig.update_layout(
+    title_text='HDI per country',
+    geo=dict(
+        showframe=False,
+        showcoastlines=False,
+        projection_type='equirectangular'
+    ),
+    annotations = [dict(
+        x=0.55,
+        y=0.1,
+        xref='paper',
+        yref='paper',
+        text='Source: <a href="http://hdr.undp.org/en/content/latest-human-development-index-ranking">\
+            United Nations Developement Programme</a>',
+        showarrow = False
+    )]
+)
+
+fig.show()
