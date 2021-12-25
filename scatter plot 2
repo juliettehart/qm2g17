@@ -1,0 +1,21 @@
+import pandas as pd
+from matplotlib import pyplot as plt
+plt.style.use('seaborn')
+
+data = pd.read_csv('2019_data_hdi_pop_labour.csv')
+x = data['HDI']
+y = data['Population Growth Rate(%)']
+female_labour_rate = data['Female Labor force participation rate(%)'] 
+
+plt.scatter(x, y, s = 100, c = female_labour_rate, cmap = 'autumn', edgecolor = 'black', linewidth = 1, alpha = 0.75)
+
+cbar = plt.colorbar()
+cbar.set_label('Female Labour Participation Rate \n (% of female population 15 years +')
+
+plt.title('Population Growth Rate, Female Labour Participation Rate and HDI by Country in 2019')
+plt.xlabel('HDI')
+plt.ylabel('Population Growth Rate (%)')
+
+plt.tight_layout()
+
+plt.show()
