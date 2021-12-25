@@ -1,0 +1,60 @@
+# actual clustering happening here
+# Source: https://realpython.com/k-means-clustering-python/
+
+#playing field with fake data
+'''
+features, true_labels = make_blobs(
+    n_samples=200,
+    centers=3,
+    cluster_std=2.75,
+    random_state=42
+)
+'''
+features = all_data_2019_filtered.loc[:, ["HDI", "female work force", 'Education_2019', 'Income_2019', 'Life_Expectancy_2019']]#"Population Growth Rate (%)"]
+
+
+scaler = StandardScaler()
+scaled_features = scaler.fit_transform(features)
+
+kmeans = KMeans(
+    init="random",
+    n_clusters=3,
+    n_init=10,
+    max_iter=300,
+    #random_state=42
+)
+
+kmeans.fit(scaled_features)
+
+labels = pd.DataFrame(kmeans.labels_, columns={'Cluster'})
+#features_data_sc = pd.DataFrame(scaled_features)
+#features_data_sc
+#labelled_data_sc = features_data_sc.merge(labels, left_index=True, right_index=True, how='left')
+#labelled_data_sc
+
+#all_data_2019_filtered['row_num'] = np.arange(len(all_data_2019_filtered))
+if (all_data_2019_filtered.iloc[0,0] != 'Afghanistan'):
+  all_data_2019_filtered.reset_index(inplace=True)
+#all_data_2019_filtered.set_index('row_num', inplace = True)
+all_data_2019_filtered_labelled = all_data_2019_filtered.join(labels)
+
+
+
+x = all_data_2019_filtered_labelled['HDI']
+y = all_data_2019_filtered_labelled['female work force']
+
+plt.scatter(x, y, s = 100, c = all_data_2019_filtered_labelled['Cluster'], cmap = 'YlGnBu', edgecolor = 'black', linewidth = 1, alpha = 0.75)
+plt.style.use('seaborn')
+plt.title('Clustered HDI and Female Labour Participation Rate by Country in 2019')
+plt.xlabel('HDI')
+plt.ylabel('Female Labour Participation Rate')
+
+plt.tight_layout()
+
+plt.savefig('./data/cluster_scatterplot.png')
+
+#labels
+#features
+#true_labels
+all_data_2019_filtered_labelled.to_csv('./data/all_data_2019_filtered_labelled.csv')
+#print(all_data_2019_filtered.iloc[0,0])
