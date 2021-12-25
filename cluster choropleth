@@ -1,0 +1,35 @@
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv('Cluster Data Catagorised.csv')
+
+fig = go.Figure(data=go.Choropleth(
+    locations = df['Code'],
+    z = df['Cluster'],
+    text = df['Country'],
+    colorscale = 'YlGnBu_r',
+    autocolorscale=False,
+    reversescale=True,
+    marker_line_color='darkgray',
+    marker_line_width=0.5,
+    colorbar_title = 'Cluster (0-2)',
+))
+
+fig.update_layout(
+    title_text='World Map by Clusters',
+    geo=dict(
+        showframe=False,
+        showcoastlines=False,
+        projection_type='equirectangular'
+   ),
+    annotations = [dict(
+        x=0.55,
+        y=0.1,
+        xref='paper',
+        yref='paper',
+        text='</a>',
+        showarrow = False
+    )]
+)
+
+fig.show()
