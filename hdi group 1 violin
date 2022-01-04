@@ -1,0 +1,7 @@
+df1 = pd.read_csv("Interactive VP - Group 1.csv")
+fig = go.Figure(data=go.Violin(y=df1['HDI'], box_visible=True, line_color='black',
+                               meanline_visible=True, fillcolor='coral', opacity=0.6,
+                               x0='HDI'))
+
+fig.update_layout(yaxis_zeroline=False, title_text='HDI - Group 1')
+fig.show()
