@@ -1,0 +1,16 @@
+# Violin Plots for each cluster
+# Author: Alina
+import plotly.express as px
+import pandas as pd
+import plotly.graph_objects as go
+
+from google.colab import files
+uploaded = files.upload()
+
+df = pd.read_csv("Interactive VP - Group 0.csv")
+fig = go.Figure(data=go.Violin(y=df['HDI'], box_visible=True, line_color='black',
+                               meanline_visible=True, fillcolor='coral', opacity=0.6,
+                               x0='HDI'))
+
+fig.update_layout(yaxis_zeroline=False, title_text='HDI - Group 0')
+fig.show()
