@@ -1,0 +1,131 @@
+# Education Index
+dataframe1 = pd.read_csv("Education - All case study countries.csv", error_bad_lines=False, encoding="ISO-8859-1")
+
+Bulgaria = dataframe1.Bulgaria
+Cyprus = dataframe1.Cyprus
+Italy = dataframe1.Italy
+Jamaica = dataframe1.Jamaica
+Samoa = dataframe1.Samoa
+Turkey = dataframe1.Turkey
+Eswatini = dataframe1.Eswatini
+Mauritania = dataframe1.Mauritania
+Tanzania = dataframe1.Tanzania
+
+# Create figure for Group 0
+# green is median and blue is mean
+# Create figure with three axes
+fig, (ax1, ax2, ax3) = plt.subplots(nrows=1, ncols=3, figsize=(9, 4))
+
+# Plot violin plot on axes 1
+ax1.violinplot(Bulgaria, showmedians=True, showextrema=True, showmeans=True)
+ax1.set_title('Bulgaria')
+ax1.set_ylabel('Income Index (GNI per capita) since 1990s')
+parts1 = ax1.violinplot(
+        dataframe1.Bulgaria, showmedians=True,
+        showextrema=True)
+for pc in parts1['bodies']:
+    pc.set_facecolor('lightyellow')
+    pc.set_edgecolor('darkgoldenrod')
+    pc.set_alpha(1)
+
+# Plot violin plot on axes 2
+ax2.violinplot(Cyprus, showmedians=True, showextrema=True, showmeans=True)
+ax2.set_title('Cyprus')
+parts2 = ax2.violinplot(
+        dataframe1.Cyprus, showmedians=True,
+        showextrema=True)
+for pc in parts2['bodies']:
+    pc.set_facecolor('lightyellow')
+    pc.set_edgecolor('darkgoldenrod')
+    pc.set_alpha(1)
+
+# Plot violin plot on axes 3
+ax3.violinplot(Italy, showmedians=True, showextrema=True, showmeans=True)
+ax3.set_title('Italy')
+parts3 = ax3.violinplot(
+        dataframe1.Italy, showmedians=True,
+        showextrema=True)
+for pc in parts3['bodies']:
+    pc.set_facecolor('lightyellow')
+    pc.set_edgecolor('darkgoldenrod')
+    pc.set_alpha(1)
+
+fig.show()
+
+# Create figure for Group 1
+fig, (ax4, ax5, ax6) = plt.subplots(nrows=1, ncols=3, figsize=(9, 4))
+
+# Plot violin plot on axes 1
+ax4.violinplot(Jamaica, showmedians=True, showextrema=True, showmeans=True)
+ax4.set_title('Jamaica')
+ax4.set_ylabel('Income Index (GNI per capita) since 1990s')
+parts4 = ax4.violinplot(
+        dataframe1.Jamaica, showmedians=True,
+        showextrema=True)
+for pc in parts4['bodies']:
+    pc.set_facecolor('paleturquoise')
+    pc.set_edgecolor('mediumturquoise')
+    pc.set_alpha(1)
+
+# Plot violin plot on axes 2
+ax5.violinplot(Samoa, showmedians=True, showextrema=True, showmeans=True)
+ax5.set_title('Samoa')
+parts5 = ax5.violinplot(
+        dataframe1.Samoa, showmedians=True,
+        showextrema=True)
+for pc in parts5['bodies']:
+    pc.set_facecolor('paleturquoise')
+    pc.set_edgecolor('mediumturquoise')
+    pc.set_alpha(1)
+
+# Plot violin plot on axes 3
+ax6.violinplot(Turkey, showmedians=True, showextrema=True, showmeans=True)
+ax6.set_title('Turkey')
+parts6 = ax6.violinplot(
+        dataframe1.Turkey, showmedians=True,
+        showextrema=True)
+for pc in parts6['bodies']:
+    pc.set_facecolor('paleturquoise')
+    pc.set_edgecolor('mediumturquoise')
+    pc.set_alpha(1)
+
+fig.show()
+
+# Create figure for Group 2
+fig, (ax7, ax8, ax9) = plt.subplots(nrows=1, ncols=3, figsize=(9, 4))
+
+# Plot violin plot on axes 1
+ax7.violinplot(Eswatini, showmedians=True, showextrema=True, showmeans=True)
+ax7.set_title('Eswatini')
+ax7.set_ylabel('Income Index (GNI per capita) since 1990s')
+parts7 = ax7.violinplot(
+        dataframe1.Eswatini, showmedians=True,
+        showextrema=True)
+for pc in parts7['bodies']:
+    pc.set_facecolor('cornflowerblue')
+    pc.set_edgecolor('mediumblue')
+    pc.set_alpha(1)
+
+# Plot violin plot on axes 2
+ax8.violinplot(Mauritania, showmedians=True, showextrema=True, showmeans=True)
+ax8.set_title('Mauritania')
+parts8 = ax8.violinplot(
+        dataframe1.Mauritania, showmedians=True,
+        showextrema=True)
+for pc in parts8['bodies']:
+    pc.set_facecolor('cornflowerblue')
+    pc.set_edgecolor('mediumblue')
+    pc.set_alpha(1)
+
+# Plot violin plot on axes 3
+ax9.violinplot(Tanzania, showmedians=True, showextrema=True, showmeans=True)
+ax9.set_title('Tanzania')
+parts9 = ax9.violinplot(
+        dataframe1.Tanzania, showmedians=True,
+        showextrema=True)
+for pc in parts9['bodies']:
+    pc.set_facecolor('cornflowerblue')
+    pc.set_edgecolor('mediumblue')
+    pc.set_alpha(1)
+
+fig.show()
