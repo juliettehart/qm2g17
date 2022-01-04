@@ -1,0 +1,20 @@
+#Histograms
+
+#Author: Claudia 
+
+#So essentially each set of code is only slightly different depending on the file path and titles
+#Here is the histogram code for the Education Index for All Countries, 2019
+
+import pandas as pd                   #importing to pandas to use it to read the csv data file
+import plotly.express as px           #importing plotly to build the histogram
+
+#just reading the data 
+data = pd.read_csv('/Users/claudianashef/Documents/Uni/Second Year /BASC0005/Project Coding /DATA/Socioeconomic Factors Data QM - CSV/2019-Table 1.csv')
+
+#naming the histogram, and plotting it 
+histogram = px.histogram(data,                            #this tells plotly to use the data located above by pandas for the histogram
+                         x='Education_2019',              #this tells plotly to use the column of data titled Education_2019
+                         labels = {"Education_2019":"Education Index"},   #this renames the x axis, otherwise would automatically use data column title
+                         title = 'Distribution of Education Index for All Countries, 2019')  #this sets the title of the histogram 
+#shows the plotted histogram
+histogram.show()    
