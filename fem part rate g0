@@ -1,0 +1,6 @@
+fig = go.Figure(data=go.Violin(y=df['female work force'], box_visible=True, line_color='black',
+                               meanline_visible=True, fillcolor='violet', opacity=0.6,
+                               x0='Female Participation Rate'))
+
+fig.update_layout(yaxis_zeroline=False, title_text='Female Participation Rate - Group 0')
+fig.show()
