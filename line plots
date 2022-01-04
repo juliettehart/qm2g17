@@ -1,0 +1,43 @@
+#Line Plots for Case Studies 
+
+#Author: Claudia
+
+#importing libraries, pandas to read the csv, matplotlib to create the graph and numpy for normalising data
+import pandas as pd
+from matplotlib import pyplot as plt
+import numpy as np
+
+#read data file
+data = pd.read_csv('/Users/claudianashef/Documents/Uni/Second Year /BASC0005/Project Coding /DATA/Case Study Temporal Data/Sheet 9-Tanzania - Cluster 2.csv')   
+
+#setting x axis as the temporal data
+x = data['Year']
+
+#setting y variables to be the different socioeconomic factors: HDI, FLPR, Population Growth
+HDI = data['HDI']
+
+y1 = (HDI - np.min(HDI))/(np.max(HDI) - np.min(HDI)) #normalising HDI data to be between 0 and 1
+
+FLPR = data['FLPR']
+y2 = (FLPR - np.min(FLPR))/(np.max(FLPR) - np.min(FLPR)) #normalising FLPR data to be between 0 and 1
+
+Pop_Growth = data['Pop Growth']
+y3 = (Pop_Growth - np.min(Pop_Growth))/(np.max(Pop_Growth) - np.min(Pop_Growth)) #normalising Population Growth data to be between 0 and 1
+
+#plotting each y variable against temporal data on graph and setting labels for each factor 
+plt.plot(x, y1, label = 'HDI')
+
+plt.plot(x, y2, label = 'FLPR')
+
+plt.plot(x, y3, label = 'PGR')
+
+plt.legend() #writing the labels
+
+#labelling the x axis, y axis and title
+plt.title('Human Development Index (HDI), Female Labour Participation Rate (FLPR) \n and Population Growth Rate (PGR) of Tanzania, 1990-2019')
+plt.xlabel('Year')
+plt.ylabel('Normalised Factor Data')
+
+#show the graph 
+plt.show()
+
