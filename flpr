@@ -1,0 +1,67 @@
+#violin plots (FLPR vs MLPR) for Case Studies
+# Author: Alina
+import plotly.graph_objects as go
+import pandas as pd
+
+# Group 0 - Bulgaria, Cyprus, Italy
+DF = pd.read_csv("FLPR - Group 0 (Bul, Cyp, Ita).csv")
+
+fig = go.Figure()
+
+fig.add_trace(go.Violin(x=DF['Country'][DF['M or F'] == 'Female' ],
+                        y=DF['LPR'][DF['M or F'] == 'Female' ],
+                        legendgroup='Female', scalegroup='Female', name='Female',
+                        side='negative',
+                        line_color='blue')
+             )
+fig.add_trace(go.Violin(x=DF['Country'][ DF['M or F'] == 'Male' ],
+                        y=DF['LPR'][ DF['M or F'] == 'Male' ],
+                        legendgroup='Male', scalegroup='Male', name='Male',
+                        side='positive',
+                        line_color='orange')
+             )
+fig.update_traces(meanline_visible=True)
+fig.update_layout(violingap=0, violinmode='overlay')
+fig.show()
+
+# Group 1 - Jamaica, Samoa, Turkey
+DF1 = pd.read_csv("FLPR - Group 1 (Jam, Sam, Tur).csv")
+
+fig = go.Figure()
+
+fig.add_trace(go.Violin(x=DF1['Country'][DF1['M or F'] == 'Female' ],
+                        y=DF1['FLPR'][DF1['M or F'] == 'Female' ],
+                        legendgroup='Female', scalegroup='Female', name='Female',
+                        side='negative',
+                        line_color='blue')
+             )
+fig.add_trace(go.Violin(x=DF1['Country'][ DF1['M or F'] == 'Male' ],
+                        y=DF1['FLPR'][ DF1['M or F'] == 'Male' ],
+                        legendgroup='Male', scalegroup='Male', name='Male',
+                        side='positive',
+                        line_color='orange')
+             )
+fig.update_traces(meanline_visible=True)
+fig.update_layout(violingap=0, violinmode='overlay')
+fig.show()
+
+# Group 2 - Eswatini, Mauritania, Tanzania
+DF2 = pd.read_csv("FLPR - Group 2 (Esw, Mau, Tan).csv")
+
+fig = go.Figure()
+
+fig.add_trace(go.Violin(x=DF2['Country'][DF2['M or F'] == 'Female' ],
+                        y=DF2['FLPR'][DF2['M or F'] == 'Female' ],
+                        legendgroup='Female', scalegroup='Female', name='Female',
+                        side='negative',
+                        line_color='blue')
+             )
+fig.add_trace(go.Violin(x=DF2['Country'][ DF2['M or F'] == 'Male' ],
+                        y=DF2['FLPR'][ DF2['M or F'] == 'Male' ],
+                        legendgroup='Male', scalegroup='Male', name='Male',
+                        side='positive',
+                        line_color='orange')
+             )
+fig.update_traces(meanline_visible=True)
+fig.update_layout(violingap=0, violinmode='overlay')
+fig.show()
