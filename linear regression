@@ -1,0 +1,35 @@
+# MLR
+#
+# Author: Jakob
+# Source: Wagschal (1999), Feldmann (2021)
+
+!pip install pingouin
+#!pip install pyreadstat
+
+import pandas as pd
+from pandas.plotting import scatter_matrix
+from pingouin import linear_regression, multivariate_normality, normality, rcorr, qqplot
+from functools import partial
+from statsmodels.stats.stattools import durbin_watson
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+from statsmodels.api import add_constant, OLS
+from statsmodels.stats.diagnostic import het_breuschpagan, linear_harvey_collier
+from statsmodels.stats.anova import anova_lm
+
+# retrieve clustered dataset
+
+!mkdir data
+!curl https://raw.githubusercontent.com/jdragha/qm2g17/main/all_data_2019_filtered_labelled_v3.csv -o ./data/all_data_2019_filtered_labelled.csv
+data_path = "./data/all_data_2019_filtered_labelled.csv"
+dat19_fl =  pd.read_csv(data_path, index_col=0)
+dat19_fl
+
+# visual inspection of the variables in the scatterplot matrix
+rel_data_names = ['Education_2019', 'Income_2019', 'Life_Expectancy_2019', 'female work force', 'Population Growth Rate (%)']
+rel_data = dat19_fl[rel_data_names]
+scatter_plots = partial(scatter_matrix, figsize=(15, 15))
+scatter_plots(rel_data)
+
+# selecting subset of independent variables
+predictor_names = ['Education_2019', 'Income_2019', 'Life_Expectancy_2019', 'female work force']
+predictors = dat19_fl[predictor_names]
