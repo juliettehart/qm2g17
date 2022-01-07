@@ -1,0 +1,25 @@
+# Henze-Zirkler test for normality / normal distribution of 
+#multivariate_normality(predictors)
+#normality(predictors)
+# correlation matrix to check for multicollinearity in the independent variables
+rel_data.corr()
+
+# Variance inflation factor
+predictors_with_const = add_constant(predictors)
+'''vif_name = 'VIF'
+multiconlinearity_result = pd.DataFrame.from_dict({vif_name: [variance_inflation_factor(predictors_with_const, index) for index in range(1, predictors_with_const.shape[1])]})
+multiconlinearity_result.index = predictor_names
+multiconlinearity_result'''
+
+# create model function
+dependent_variable = dat19_fl['Population Growth Rate (%)']
+model_function = partial(linear_regression, predictors, dependent_variable)
+
+# Call model function and retrieve simple dataframe output
+#model_as_df = model_function(as_dataframe=True)
+#model_as_df
+
+# detailed regression results in statsmodel output table
+model_function_statsmodels = partial(OLS, dependent_variable)
+model_all = model_function_statsmodels(predictors_with_const).fit()
+model_all.summary()
