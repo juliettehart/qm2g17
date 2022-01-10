@@ -1,0 +1,17 @@
+# Descriptive statistics and visualisations
+# Source: Worksheet W4
+
+
+plt.style.use('seaborn')
+
+
+#all_data_2019.describe()
+world_education_index.describe()
+#all_data_2019_filtered.describe()
+
+#overview = 
+#all_data_2019_filtered.hist(bins = 20)
+#fig = overview.get_figure()
+#fig.savefig.savefig('./data/overview_histograms.png')
+#plt.savefig('./data/overview_histograms.png')
+#all_data_2019_filtered.plot(x='HDI', y= 'female work force', kind='scatter')
