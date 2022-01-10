@@ -1,0 +1,50 @@
+# joining and renaming datasets
+# Source: Worksheet W3
+
+# changing the index column to 'Countries'
+# necessary for transl() to work properly
+
+cols = world_education_index.index.name
+#print(cols)
+if (cols != 'Country'): # executing this code multiple times will result in unintended dropped index without this check
+  world_education_index.set_index("Country", drop=True, append=False, inplace=True, verify_integrity=True)
+  world_income_index.set_index("Country", drop=True, append=False, inplace=True, verify_integrity=True)
+  world_life_expectancy_index.set_index("Country", drop=True, append=False, inplace=True, verify_integrity=True)
+
+  # deleting leading space char in UN Country names
+  world_education_index = delLeadingChar(world_education_index)
+  world_income_index = delLeadingChar(world_income_index)
+  world_life_expectancy_index = delLeadingChar(world_life_expectancy_index)
+
+  #world_education_index.assign('2019f' = lambda world_education_index: float(world_education_index.'2019'))
+
+# renaming different country names, see function definition
+world_pop_total = transl(world_pop_total, countrynames_dict)
+world_education_index = transl(world_education_index, countrynames_dict)
+world_income_index = transl(world_income_index, countrynames_dict)
+world_life_expectancy_index = transl(world_life_expectancy_index, countrynames_dict)
+#world_education_index.to_csv('./data/check_wei.csv')
+
+# slicing and joining datasets to create combined dataset with relevant colums
+world_pop_2019 = world_pop_total[['2019']]
+world_education_index = world_education_index[['2019']]
+world_income_index = world_income_index[['2019']]
+world_life_expectancy_index = world_life_expectancy_index[['2019']]
+#world_pop_2019.to_csv('./data/world_pop_2019.csv')
+all_data_2019 = world_hdi_femlab_popgr.merge(world_pop_2019, left_index=True, right_index=True, how='left')
+all_data_2019.rename(columns = {'2019':'Population_Size_2019'}, inplace = True)
+all_data_2019 = all_data_2019.merge(world_education_index, left_index=True, right_index=True, how='left')
+all_data_2019.rename(columns = {'2019':'Education_2019'}, inplace = True)
+all_data_2019 = all_data_2019.merge(world_income_index, left_index=True, right_index=True, how='left')
+all_data_2019.rename(columns = {'2019':'Income_2019'}, inplace = True)
+all_data_2019 = all_data_2019.merge(world_life_expectancy_index, left_index=True, right_index=True, how='left')
+all_data_2019.rename(columns = {'2019':'Life_Expectancy_2019'}, inplace = True)
+all_data_2019.to_csv('./data/all_data_2019.csv')
+
+#different_countrynames = all_data_2019[all_data_2019['HDI'].isnull()].merge(world_pop_2019[all_data_2019['Population_Size_2019'].isnull()], left_index=True, right_index=True, how = 'outer')
+#different_countrynames.to_csv('./data/different_countrynames.csv')
+#all_data_2019.head()
+
+# filter out countries with population < 100000
+all_data_2019_filtered = all_data_2019.loc[all_data_2019['Population_Size_2019'] > 100000]
+#all_data_2019_filtered
