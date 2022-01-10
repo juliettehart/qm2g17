@@ -1,0 +1,36 @@
+# downloading and formatting data
+# Source: Worksheet W2
+
+!mkdir data
+
+# downloading data from github repository
+
+#!curl https://api.worldbank.org/v2/en/indicator/SP.POP.TOTL?downloadformat=csv -o ./data/world_pop_total.zip
+!curl https://raw.githubusercontent.com/jdragha/qm2g17/main/API_SP.POP.TOTL_DS2_en_csv_v2_3158886.csv -o ./data/API_SP.POP.TOTL_DS2_en_csv_v2_3158886.csv
+!curl https://raw.githubusercontent.com/jdragha/qm2g17/main/World_HDI_FemaleLPR_PopGrowth_2019.csv -o ./data/World_HDI_FemaleLPR_PopGrowth_2019.csv
+!curl https://raw.githubusercontent.com/jdragha/qm2g17/main/countrynames_dict.csv -o ./data/countrynames_dict.csv
+!curl https://raw.githubusercontent.com/jdragha/qm2g17/main/World_Education_index.csv -o ./data/World_Education_index.csv
+!curl https://raw.githubusercontent.com/jdragha/qm2g17/main/World_Income_index.csv -o ./data/World_Income_index.csv
+!curl https://raw.githubusercontent.com/jdragha/qm2g17/main/World_Life_expectancy_index.csv -o ./data/World_Life_expectancy_index.csv
+#!unzip -o -d ./data ./data/world_pop_total.zip -x Metadata_Country_API_SP.POP.TOTL_DS2_en_csv_v2_3158886.csv Metadata_Indicator_API_SP.POP.TOTL_DS2_en_csv_v2_3158886.csv
+
+# parsing the data files into pandas dataframes
+
+data_path = "./data/API_SP.POP.TOTL_DS2_en_csv_v2_3158886.csv"
+#!ls "./data"
+world_pop_total = pd.read_csv(data_path, index_col=0, header=2)
+#print(world_pop_total)
+data_path = "./data/World_HDI_FemaleLPR_PopGrowth_2019.csv"
+world_hdi_femlab_popgr =  pd.read_csv(data_path, index_col=0)
+#world_hdi_femlab_popgr.head()
+data_path = "./data/countrynames_dict.csv"
+countrynames_dict = pd.read_csv(data_path)
+#print(countrynames_dict)
+
+data_path = "./data/World_Education_index.csv"
+world_education_index = pd.read_csv(data_path, index_col=0, header=5, encoding='latin-1')
+data_path = "./data/World_Income_index.csv"
+world_income_index = pd.read_csv(data_path, index_col=0, header=5, encoding='latin-1')
+data_path = "./data/World_Life_expectancy_index.csv"
+world_life_expectancy_index = pd.read_csv(data_path, index_col=0, header=5, encoding='latin-1')
+#world_life_expectancy_index
